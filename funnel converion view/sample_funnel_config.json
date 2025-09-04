@@ -1,0 +1,36 @@
+{
+  "funnel_name": "widget_engagement_funnel",
+  "project_id": "common-tech-434709",
+  "source_dataset": "events",
+  "destination_dataset": "sandbox",
+  "data_source": "common-tech-434709.events.events",
+  "user_id_column": "user_id",
+  "session_id_column": "anonymous_id",
+  "event_column": "event",
+  "timestamp_column": "timestamp",
+  "partition_column": "date",
+  "time_period_days": 7,
+  "user_base_table": null,
+  "user_segmentation_fields": [],
+  "app_version_extraction": null,
+  "os_extraction": null,
+  "entry_point_extraction": null,
+  "filters": [],
+  "steps": [
+    {
+      "rank": 1,
+      "screen_name": "Home Navigation",
+      "loaded_events": ["ViewedHomeNavigationBar"]
+    },
+    {
+      "rank": 2,
+      "screen_name": "Offers Widget",
+      "loaded_events": ["LoadedOffersWidget"]
+    },
+    {
+      "rank": 3,
+      "screen_name": "Rewards Widget",
+      "loaded_events": ["LoadedRewardsWidget"]
+    }
+  ]
+} 

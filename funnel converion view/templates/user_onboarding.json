@@ -1,0 +1,39 @@
+{
+  "funnel_name": "user_onboarding",
+  "project_id": "your-project-id",
+  "dataset": "analytics",
+  "data_source": "events.app_events",
+  "user_base_table": "users.user_profiles",
+  "time_period_days": 14,
+  "user_id_column": "user_id",
+  "session_id_column": "session_id",
+  "event_column": "event_name",
+  "timestamp_column": "event_timestamp",
+  "partition_column": "event_date",
+  "user_segmentation_fields": ["user_type"],
+  "max_step": 4,
+  "steps": [
+    {
+      "rank": 1,
+      "screen_name": "Sign Up",
+      "loaded_events": ["'sign_up'", "'registration'"]
+    },
+    {
+      "rank": 2,
+      "screen_name": "Email Verification",
+      "loaded_events": ["'email_verified'", "'verify_email'"]
+    },
+    {
+      "rank": 3,
+      "screen_name": "Profile Setup",
+      "loaded_events": ["'profile_created'", "'setup_complete'"]
+    },
+    {
+      "rank": 4,
+      "screen_name": "First Action",
+      "loaded_events": ["'first_action'", "'onboarding_complete'"]
+    }
+  ],
+  "filters": ["event_name in ('sign_up', 'email_verified', 'profile_created', 'first_action')"],
+  "entry_point_extraction": "source"
+} 

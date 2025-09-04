@@ -1,0 +1,79 @@
+{
+  "funnel_name": "ecommerce_checkout_funnel",
+  "project_id": "common-tech-434709",
+  "source_dataset": "events",
+  "destination_dataset": "sandbox",
+  "data_source": "common-tech-434709.events.events",
+  "user_base_table": null,
+  "time_period_days": 30,
+  "steps": [
+    {
+      "rank": 1,
+      "screen_name": "Home Page",
+      "loaded_events": ["page_view"],
+      "filters": {
+        "event": "= 'page_view'",
+        "properties.page_path": "= '/home'"
+      }
+    },
+    {
+      "rank": 2,
+      "screen_name": "Product Browse",
+      "loaded_events": ["page_view", "click"],
+      "filters": {
+        "event": "in ('page_view', 'click')",
+        "properties.page_path": "like '/products%'"
+      }
+    },
+    {
+      "rank": 3,
+      "screen_name": "Product Detail",
+      "loaded_events": ["page_view", "click"],
+      "filters": {
+        "event": "in ('page_view', 'click')",
+        "properties.page_path": "like '/product/%'"
+      }
+    },
+    {
+      "rank": 4,
+      "screen_name": "Add to Cart",
+      "loaded_events": ["click", "add_to_cart"],
+      "filters": {
+        "event": "in ('click', 'add_to_cart')",
+        "properties.event_name": "= 'add_to_cart'"
+      }
+    },
+    {
+      "rank": 5,
+      "screen_name": "Checkout",
+      "loaded_events": ["page_view", "begin_checkout"],
+      "filters": {
+        "event": "in ('page_view', 'begin_checkout')",
+        "properties.page_path": "like '/checkout%'"
+      }
+    },
+    {
+      "rank": 6,
+      "screen_name": "Purchase",
+      "loaded_events": ["purchase"],
+      "filters": {
+        "event": "= 'purchase'"
+      }
+    }
+  ],
+  "filters": [
+    "user_id is not null",
+    "event is not null",
+    "timestamp is not null"
+  ],
+  "user_id_column": "user_id",
+  "session_id_column": "anonymous_id",
+  "event_column": "event",
+  "timestamp_column": "timestamp",
+  "partition_column": "date",
+  "user_segmentation_fields": [],
+  "max_step": 6,
+  "app_version_extraction": "app",
+  "os_extraction": null,
+  "entry_point_extraction": null
+} 
